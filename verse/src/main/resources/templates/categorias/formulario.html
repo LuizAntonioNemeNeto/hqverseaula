@@ -20,10 +20,17 @@
         <a class="navbar-brand fw-bold" href="/">
             HqVerse
         </a>
-        <a class="btn btn-outline-light btn-sm"
-           href="/categorias">
-            Categorias
-        </a>
+        <div class="d-flex gap-2 ms-auto">
+
+            <a class="btn btn-outline-light btn-sm"
+               href="/categorias"><i class="iconoir-list"></i>
+                Categorias
+            </a>
+            <a class="btn btn-outline-light btn-sm"
+               href="/obras"><i class="iconoir-book"></i>
+                Obras
+            </a>
+        </div>
     </div>
 </nav>
 
@@ -31,6 +38,7 @@
     <h1 class="text-warning mb-4">Cadastrar Categorias</h1>
     <form th:action="@{/categorias}" method="post" th:object="${categoria}">
         <div class="mb-3">
+            <input type="hidden" th:field="*{id}">
             <label class="form-label">Nome</label>
             <input type="text" class="form-control"
                    required th:field="*{nome}">

@@ -5,6 +5,7 @@ import com.hq.verse.repository.CategoriaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,21 +20,32 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public String listar(Model model){
-        model.addAttribute("categorias",repository.findAll());
+    public String listar(Model model) {
+        model.addAttribute("categorias", repository.findAll());
 
         return "categorias/lista";
     }
 
+    @GetMapping("/{id}/editar")
+    public String editar(@PathVariable Integer id, Model model) {
+        Categoria categoria = repository.findById(id).orElse(null);
+
+        if(categoria == null){
+            return "redirect:/categorias";
+        }
+        model.addAttribute("categoria", categoria);
+        return "categorias/formulario";
+    }
+
     @GetMapping("/nova")
-    public String novo(Model model){
-        model.addAttribute("categoria",new Categoria());
+    public String novo(Model model) {
+        model.addAttribute("categoria", new Categoria());
 
         return "categorias/formulario";
     }
 
     @PostMapping
-    public String salvar(Categoria categoria){
+    public String salvar(Categoria categoria) {
         repository.save(categoria);
 
         return "redirect:/categorias";
