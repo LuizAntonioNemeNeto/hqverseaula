@@ -7,6 +7,8 @@ import com.hq.verse.repository.ObrasRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/obras")
@@ -33,5 +35,33 @@ public class ObrasController {
         model.addAttribute("categorias", categoriaRepository.findAll());
 
         return "obras/formulario";
+    }
+
+    @GetMapping("/{id}/editar")
+    public String editar(@PathVariable Integer id, Model model) {
+        Obras obras = obrasRepository.findById(id).orElse(null);
+
+        if(obras == null){
+            return "redirect:/obras";
+        }
+
+        model.addAttribute("obra", obras);
+        model.addAttribute("categorias", categoriaRepository.findAll());
+        return "obras/formulario";
+    }
+
+    @PostMapping
+    public String salvar(Obras obras, Integer categoriaId){
+        Categoria categoria = categoriaRepository.findById(categoriaId).orElse(null);
+
+        if(categoria == null){
+            return "obras/lista";
+        }
+
+        obras.setCategoria(categoria);
+
+        obrasRepository.save(obras);
+
+        return "redirect:/obras";
     }
 }
