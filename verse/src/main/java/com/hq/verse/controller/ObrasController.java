@@ -64,4 +64,11 @@ public class ObrasController {
 
         return "redirect:/obras";
     }
+
+    @PostMapping("/{id}/vender")
+    public String vender(@PathVariable Integer id){
+        obrasRepository.deleteById(id);
+
+        return "redirect:/obras";
+    }
 }

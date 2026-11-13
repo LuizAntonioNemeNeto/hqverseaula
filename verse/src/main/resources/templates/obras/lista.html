@@ -53,6 +53,13 @@
                            class="btn btn-outline-warning btn-sm">
                             <i class="iconoir-edit-pencil"></i>
                         </a>
+                        <form th:action="@{/obras/{id}/vender(id=${obra.id})}" method="post" onsubmit="return confirm('Deseja comprar esta obra?')">
+                            <!--                            Post precisa de formulário-->
+                            <button type="submit" class=" btn btn-outline-danger btn-sm">
+                                <i class="iconoir-shopping-bag"></i>
+                            </button>
+
+                        </form>
                     </div>
 
                 </div>
