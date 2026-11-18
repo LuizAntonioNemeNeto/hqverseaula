@@ -46,7 +46,12 @@
         <div class="mb-3">
             <label class="form-label">Autor</label>
             <input type="text" class="form-control"
-                   required th:field="*{autor}">
+                   required th:field="*{autor}" placeholder="Nome Completo">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Imagem</label>
+            <input type="text" class="form-control"
+                   required th:field="*{imagem}" placeholder="Exemplo: https://encrypted-tbn0.gstatic.com/images">
         </div>
         <div class="mb-3">
             <label class="form-label">Preço</label>

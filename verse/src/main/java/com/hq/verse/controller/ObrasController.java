@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @RequestMapping("/obras")
 @Controller
 public class ObrasController {
@@ -25,6 +27,14 @@ public class ObrasController {
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("obras", obrasRepository.findAll());
+
+        return "obras/lista";
+    }
+
+    @GetMapping("/categoria/{categoriaId}")
+    public String filtarCategoria(@PathVariable Integer categoriaId,Model model) {
+        List<Obras> obras = obrasRepository.findByCategoria_Id(categoriaId);
+        model.addAttribute("obras", obras);
 
         return "obras/lista";
     }

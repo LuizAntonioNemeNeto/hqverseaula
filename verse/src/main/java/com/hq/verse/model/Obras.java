@@ -10,6 +10,7 @@ public class Obras {
     private String titulo;
     private String autor;
     private double preco;
+    private String imagem;
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
@@ -18,11 +19,12 @@ public class Obras {
 
     }
 
-    public Obras(Integer id, String titulo, String autor, double preco, Categoria categoria) {
+    public Obras(Integer id, String titulo, String autor, double preco, String imagem, Categoria categoria) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.preco = preco;
+        this.imagem = imagem;
         this.categoria = categoria;
     }
 
@@ -56,6 +58,14 @@ public class Obras {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public Categoria getCategoria() {
